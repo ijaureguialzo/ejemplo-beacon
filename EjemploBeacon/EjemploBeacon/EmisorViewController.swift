@@ -8,19 +8,50 @@
 
 import UIKit
 
-class EmisorViewController: UIViewController {
+import Eureka
+
+class EmisorViewController: FormViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+
+        form +++ Section("Baliza")
+        <<< LabelRow() { row in
+            row.title = "UUID"
+            row.value = "B6ED17C5-A342-4ACF-9862-8BE7D4E103BC"
+        }
+        <<< LabelRow() { row in
+            row.title = "Major"
+            row.value = "10"
+        }
+        <<< LabelRow() { row in
+            row.title = "Minor"
+            row.value = "1"
+        }
+        <<< LabelRow() { row in
+            row.title = "Identidad"
+            row.value = "com.jaureguialzo.ejemplobeacon"
+        }
+            +++ Section()
+        <<< LabelRow() { row in
+            row.title = "Estado"
+            row.value = "Listo para transmitir"
+        }
+        <<< ButtonRow { row in
+            row.title = "Transmitir"
+        }.onCellSelection { cell, row in
+            log.debug("Iniciando transmisión")
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
 
     /*
     // MARK: - Navigation

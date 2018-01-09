@@ -67,12 +67,12 @@
 			children = (
 				4185FE8620050FC700A32277 /* AppDelegate.swift */,
 				4185FE8A20050FC700A32277 /* Main.storyboard */,
-				4185FE8D20050FC700A32277 /* Assets.xcassets */,
-				4185FE8F20050FC700A32277 /* LaunchScreen.storyboard */,
-				4185FE9220050FC700A32277 /* Info.plist */,
 				414B5B532005127000F2E961 /* PrincipalViewController.swift */,
 				414B5B552005129A00F2E961 /* EmisorViewController.swift */,
 				414B5B57200512B500F2E961 /* ReceptorViewController.swift */,
+				4185FE8D20050FC700A32277 /* Assets.xcassets */,
+				4185FE8F20050FC700A32277 /* LaunchScreen.storyboard */,
+				4185FE9220050FC700A32277 /* Info.plist */,
 			);
 			path = EjemploBeacon;
 			sourceTree = "<group>";

@@ -13,17 +13,21 @@ import Eureka
 import CoreLocation
 import CoreBluetooth
 
-class EmisorViewController: FormViewController, CBPeripheralManagerDelegate {
+class EmisorViewController: FormViewController, CBPeripheralManagerDelegate, CLLocationManagerDelegate {
 
     // Objects used in the creation of iBeacons
     var region: CLBeaconRegion?
     var manager = CBPeripheralManager()
 
+    let locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-
+       
+        enableLocationServices()
+        
         // Crear la baliza
         self.region = createBeaconRegion()
 
@@ -101,4 +105,33 @@ class EmisorViewController: FormViewController, CBPeripheralManagerDelegate {
         }
     }
 
+    // REF: Pedir autorización para la localización: https://developer.apple.com/documentation/corelocation/choosing_the_authorization_level_for_location_services/requesting_always_authorization
+    
+    func enableLocationServices() {
+        locationManager.delegate = self
+        
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+
+            locationManager.requestAlwaysAuthorization()
+            break
+            
+        case .restricted, .denied:
+            // Disable location features
+            log.error("No tenemos acceso a la localización")
+            break
+            
+        case .authorizedWhenInUse:
+            // Enable basic location features
+            log.debug("Localización sólo al usar la aplicación")
+            break
+            
+        case .authorizedAlways:
+            // Enable any of your app's location features
+            log.debug("Localización permanente")
+            break
+        }
+    }
+
+    
 }

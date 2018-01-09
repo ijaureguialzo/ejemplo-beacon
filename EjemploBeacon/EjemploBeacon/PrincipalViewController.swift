@@ -8,36 +8,49 @@
 
 import UIKit
 
-class PrincipalViewController: UIViewController {
+import CoreLocation
 
-    // REF: Tutorial original sobre iBeacons: https://www.pubnub.com/blog/2014-08-19-smart-ibeacon-communication-in-the-swift-programming-language/
+// REF: Documentación de Apple: https://developer.apple.com/ibeacon/
+// REF: Tutorial original sobre iBeacons: https://www.pubnub.com/blog/2014-08-19-smart-ibeacon-communication-in-the-swift-programming-language/
 
-    // REF: Documentación de Apple: https://developer.apple.com/ibeacon/
-    // REF: Apple: Usar iPhone como baliza: https://developer.apple.com/documentation/corelocation/turning_an_ios_device_into_an_ibeacon
-    // REF: Apple: Calcular distancia a baliza: https://developer.apple.com/documentation/corelocation/determining_the_proximity_to_an_ibeacon
+let miBaliza = Baliza(uuid: "B6ED17C5-A342-4ACF-9862-8BE7D4E103BC",
+                      major: 100,
+                      minor: 1,
+                      id: "com.jaureguialzo.ejemplobeacon")
 
-    // REF: Permisos de localización: https://community.estimote.com/hc/en-us/articles/203393036-How-to-obtain-Location-Services-authorization-for-iBeacon-on-iOS-
-    
+class PrincipalViewController: UIViewController, CLLocationManagerDelegate {
+
+    let locationManager = CLLocationManager()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Activar la localización y pedir los permisos
+        enableLocationServices()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // REF: Pedir autorización para la localización: https://developer.apple.com/documentation/corelocation/choosing_the_authorization_level_for_location_services/requesting_always_authorization
+
+    func enableLocationServices() {
+        locationManager.delegate = self
+
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            locationManager.requestAlwaysAuthorization()
+            break
+
+        case .restricted, .denied:
+            log.error("No tenemos acceso a la localización")
+            break
+
+        case .authorizedWhenInUse:
+            log.debug("Localización sólo al usar la aplicación")
+            break
+
+        case .authorizedAlways:
+            log.debug("Localización permanente")
+            break
+        }
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

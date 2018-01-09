@@ -14,6 +14,7 @@
 		4185FE8C20050FC700A32277 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4185FE8A20050FC700A32277 /* Main.storyboard */; };
 		4185FE8E20050FC700A32277 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4185FE8D20050FC700A32277 /* Assets.xcassets */; };
 		4185FE9120050FC700A32277 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4185FE8F20050FC700A32277 /* LaunchScreen.storyboard */; };
+		41B979072005646E00ED6ECC /* Baliza.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B979062005646E00ED6ECC /* Baliza.swift */; };
 		7F2BBDECAC246668729E010D /* Pods_EjemploBeacon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0643C2C212FD02859AA58356 /* Pods_EjemploBeacon.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		4185FE8D20050FC700A32277 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4185FE9020050FC700A32277 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4185FE9220050FC700A32277 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41B979062005646E00ED6ECC /* Baliza.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Baliza.swift; sourceTree = "<group>"; };
 		CF812470AD50A0F32ED7C559 /* Pods-EjemploBeacon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EjemploBeacon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EjemploBeacon/Pods-EjemploBeacon.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,6 +72,7 @@
 				414B5B532005127000F2E961 /* PrincipalViewController.swift */,
 				414B5B552005129A00F2E961 /* EmisorViewController.swift */,
 				414B5B57200512B500F2E961 /* ReceptorViewController.swift */,
+				41B979062005646E00ED6ECC /* Baliza.swift */,
 				4185FE8D20050FC700A32277 /* Assets.xcassets */,
 				4185FE8F20050FC700A32277 /* LaunchScreen.storyboard */,
 				4185FE9220050FC700A32277 /* Info.plist */,
@@ -229,6 +232,7 @@
 			files = (
 				4185FE8720050FC700A32277 /* AppDelegate.swift in Sources */,
 				414B5B542005127000F2E961 /* PrincipalViewController.swift in Sources */,
+				41B979072005646E00ED6ECC /* Baliza.swift in Sources */,
 				414B5B58200512B500F2E961 /* ReceptorViewController.swift in Sources */,
 				414B5B562005129A00F2E961 /* EmisorViewController.swift in Sources */,
 			);

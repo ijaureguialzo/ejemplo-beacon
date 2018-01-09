@@ -10,70 +10,140 @@ import UIKit
 
 import Eureka
 
-class ReceptorViewController: FormViewController {
+import CoreLocation
+import CoreBluetooth
+
+class ReceptorViewController: FormViewController, CLLocationManagerDelegate {
+
+    // REF: Apple: Calcular distancia a baliza: https://developer.apple.com/documentation/corelocation/determining_the_proximity_to_an_ibeacon
+
+    // Objects used in the creation of iBeacons
+    var region: CLBeaconRegion?
+    var manager: CLLocationManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-
+        // Formulario
         form +++ Section("Baliza")
         <<< LabelRow() { row in
             row.title = "UUID"
-            row.value = "B6ED17C5-A342-4ACF-9862-8BE7D4E103BC"
+            row.tag = "uuid"
         }
         <<< LabelRow() { row in
             row.title = "Major"
-            row.value = "10"
+            row.tag = "major"
         }
         <<< LabelRow() { row in
             row.title = "Minor"
-            row.value = "1"
+            row.tag = "minor"
         }
             +++ Section()
         <<< LabelRow() { row in
             row.title = "Estado"
+            row.tag = "estado"
             row.value = "Inactivo"
         }
         <<< ButtonRow { row in
             row.title = "Detectar"
         }.onCellSelection { cell, row in
             log.debug("Iniciando detección")
+
+            self.manager?.startMonitoring(for: self.region!)
+
+            self.actualizar(tag: "estado", valor: "Iniciando detección")
         }
             +++ Section("Resultados")
         <<< SwitchRow { row in
             row.title = "Encontrada"
-            row.value = true
+            row.tag = "encontrada"
+            row.value = false
         }
         <<< LabelRow() { row in
             row.title = "Precisión"
-            row.value = "0.7234365243"
+            row.tag = "precision"
         }
         <<< LabelRow() { row in
             row.title = "Distancia"
-            row.value = "Cerca"
+            row.tag = "distancia"
         }
         <<< LabelRow() { row in
             row.title = "RSSI"
-            row.value = "-54"
+            row.tag = "rssi"
         }
 
+        self.manager = CLLocationManager()
+        manager?.delegate = self
+        region = CLBeaconRegion(proximityUUID: UUID(uuidString: miBaliza.uuid)!, identifier: miBaliza.id)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // Actulizar el interfaz
+    func actualizar(tag campo: String, valor: String?) {
+        let fila: LabelRow? = form.rowBy(tag: campo)
+        fila?.value = valor
+        fila?.reload()
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func actualizarSwitch(tag campo: String, activado valor: Bool) {
+        let fila: SwitchRow? = form.rowBy(tag: campo)
+        fila?.value = valor
+        fila?.reload()
     }
-    */
+
+    func reset() {
+        self.actualizar(tag: "uuid", valor: "")
+        self.actualizar(tag: "major", valor: "")
+        self.actualizar(tag: "minor", valor: "")
+        self.actualizarSwitch(tag: "encontrada", activado: false)
+        self.actualizar(tag: "precision", valor: "")
+        self.actualizar(tag: "rssi", valor: "")
+    }
+
+    // Responder a los eventos de localización
+    func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
+        self.actualizar(tag: "estado", valor: "Buscando...")
+        manager.startRangingBeacons(in: region as! CLBeaconRegion) // Para pruebas
+    }
+
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        manager.startRangingBeacons(in: region as! CLBeaconRegion)
+        self.actualizar(tag: "estado", valor: "Posible coincidencia")
+    }
+
+    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
+        self.actualizar(tag: "estado", valor: "Error :(")
+        log.error(error)
+    }
+
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        manager.stopRangingBeacons(in: region as! CLBeaconRegion)
+        reset()
+    }
+
+    func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
+        if(beacons.count == 0) { return }
+
+        let beacon = beacons.last!
+
+        if (beacon.proximity == .unknown) {
+            self.actualizar(tag: "distancia", valor: "")
+            reset()
+            return
+        } else if (beacon.proximity == .immediate) {
+            self.actualizar(tag: "distancia", valor: "Al lado")
+        } else if (beacon.proximity == .near) {
+            self.actualizar(tag: "distancia", valor: "Cerca")
+        } else if (beacon.proximity == .far) {
+            self.actualizar(tag: "distancia", valor: "Lejos")
+        }
+
+        self.actualizar(tag: "uuid", valor: beacon.proximityUUID.uuidString)
+        self.actualizar(tag: "major", valor: "\(beacon.major)")
+        self.actualizar(tag: "minor", valor: "\(beacon.minor)")
+        self.actualizarSwitch(tag: "encontrada", activado: true)
+        self.actualizar(tag: "precision", valor: "\(beacon.accuracy)")
+        self.actualizar(tag: "rssi", valor: "\(beacon.rssi)")
+
+    }
 
 }

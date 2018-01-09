@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,19 +19,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="k2v-1w-yKs">
-                                <rect key="frame" x="137" y="332.33333333333331" width="102" height="148"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="k2v-1w-yKs">
+                                <rect key="frame" x="86" y="384.33333333333331" width="204" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mx2-Xb-Ll4">
-                                        <rect key="frame" x="0.0" y="0.0" width="102" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="77" height="44"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <state key="normal" title="Emisor"/>
                                         <connections>
                                             <segue destination="2nP-z0-MBt" kind="show" id="ZTj-m3-w6T"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="|" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JUB-70-t5G">
+                                        <rect key="frame" x="85" y="0.0" width="9" height="44"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X5W-ud-3W5">
-                                        <rect key="frame" x="0.0" y="104" width="102" height="44"/>
+                                        <rect key="frame" x="102" y="0.0" width="102" height="44"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <state key="normal" title="Receptor"/>
                                         <connections>
@@ -39,11 +46,16 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Works" translatesAutoresizingMaskIntoConstraints="NO" id="haS-US-jLz">
+                                <rect key="frame" x="62.666666666666657" y="670" width="249.99999999999997" height="68"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="k2v-1w-yKs" firstAttribute="centerX" secondItem="4dl-1P-V5P" secondAttribute="centerX" id="JRc-MU-1tr"/>
+                            <constraint firstItem="haS-US-jLz" firstAttribute="centerX" secondItem="4dl-1P-V5P" secondAttribute="centerX" id="RyG-h1-Bts"/>
                             <constraint firstItem="k2v-1w-yKs" firstAttribute="centerY" secondItem="4dl-1P-V5P" secondAttribute="centerY" id="SrR-oP-chE"/>
+                            <constraint firstItem="3Uc-kL-cPP" firstAttribute="bottom" secondItem="haS-US-jLz" secondAttribute="bottom" constant="40" id="mGF-50-Zvz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3Uc-kL-cPP"/>
                     </view>
@@ -102,4 +114,7 @@
             <point key="canvasLocation" x="-729" y="21"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Works" width="250" height="68"/>
+    </resources>
 </document>

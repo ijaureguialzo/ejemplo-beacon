@@ -10,57 +10,95 @@ import UIKit
 
 import Eureka
 
-class EmisorViewController: FormViewController {
+import CoreLocation
+import CoreBluetooth
+
+class EmisorViewController: FormViewController, CBPeripheralManagerDelegate {
+
+    // Objects used in the creation of iBeacons
+    var region: CLBeaconRegion?
+    var manager = CBPeripheralManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
 
+        // Crear la baliza
+        self.region = createBeaconRegion()
+
         form +++ Section("Baliza")
         <<< LabelRow() { row in
             row.title = "UUID"
-            row.value = "B6ED17C5-A342-4ACF-9862-8BE7D4E103BC"
+            row.tag = "uuid"
         }
         <<< LabelRow() { row in
             row.title = "Major"
-            row.value = "10"
+            row.tag = "major"
         }
         <<< LabelRow() { row in
             row.title = "Minor"
-            row.value = "1"
+            row.tag = "minor"
         }
         <<< LabelRow() { row in
             row.title = "Identidad"
-            row.value = "com.jaureguialzo.ejemplobeacon"
+            row.tag = "identidad"
         }
             +++ Section()
         <<< LabelRow() { row in
             row.title = "Estado"
+            row.tag = "estado"
             row.value = "Listo para transmitir"
         }
         <<< ButtonRow { row in
             row.title = "Transmitir"
         }.onCellSelection { cell, row in
             log.debug("Iniciando transmisión")
+            
+            self.actualizarPantalla()
+            
+            self.manager = CBPeripheralManager(delegate: self, queue: nil, options: nil)
         }
 
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func createBeaconRegion() -> CLBeaconRegion? {
+        let proximityUUID = UUID(uuidString:
+            "B6ED17C5-A342-4ACF-9862-8BE7D4E103BC")
+        let major: CLBeaconMajorValue = 100
+        let minor: CLBeaconMinorValue = 1
+        let beaconID = "com.jaureguialzo.ejemplobeacon"
+
+        return CLBeaconRegion(proximityUUID: proximityUUID!,
+                              major: major, minor: minor, identifier: beaconID)
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func actualizarPantalla() {
+        actualizar(tag: "uuid", valor: self.region?.proximityUUID.uuidString)
+        actualizar(tag: "major", valor: "\(self.region?.major ?? 0)")
+        actualizar(tag: "minor", valor: "\(self.region?.minor ?? 0)")
+        actualizar(tag: "identidad", valor: self.region?.identifier)
     }
-    */
+
+    func actualizar(tag campo: String, valor: String?) {
+        let fila: LabelRow? = form.rowBy(tag: campo)
+        fila?.value = valor
+        fila?.reload()
+    }
+   
+    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
+        if(peripheral.state == .poweredOn) {
+            log.debug("Baliza ON")
+
+            let peripheralData = region?.peripheralData(withMeasuredPower: nil)
+            self.manager.startAdvertising(peripheralData as? [String : Any])
+
+            actualizar(tag: "estado", valor: "Transmitiendo")
+        } else if(peripheral.state == .poweredOff) {
+            log.debug("Baliza OFF")
+            self.manager.stopAdvertising()
+            actualizar(tag: "estado", valor: "Apagada")
+        }
+    }
 
 }

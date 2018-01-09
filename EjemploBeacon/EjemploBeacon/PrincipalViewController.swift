@@ -16,6 +16,8 @@ class PrincipalViewController: UIViewController {
     // REF: Apple: Usar iPhone como baliza: https://developer.apple.com/documentation/corelocation/turning_an_ios_device_into_an_ibeacon
     // REF: Apple: Calcular distancia a baliza: https://developer.apple.com/documentation/corelocation/determining_the_proximity_to_an_ibeacon
 
+    // REF: Permisos de localización: https://community.estimote.com/hc/en-us/articles/203393036-How-to-obtain-Location-Services-authorization-for-iBeacon-on-iOS-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

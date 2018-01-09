@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		414B5B542005127000F2E961 /* PrincipalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B5B532005127000F2E961 /* PrincipalViewController.swift */; };
+		414B5B562005129A00F2E961 /* EmisorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B5B552005129A00F2E961 /* EmisorViewController.swift */; };
+		414B5B58200512B500F2E961 /* ReceptorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B5B57200512B500F2E961 /* ReceptorViewController.swift */; };
 		4185FE8720050FC700A32277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FE8620050FC700A32277 /* AppDelegate.swift */; };
-		4185FE8920050FC700A32277 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4185FE8820050FC700A32277 /* ViewController.swift */; };
 		4185FE8C20050FC700A32277 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4185FE8A20050FC700A32277 /* Main.storyboard */; };
 		4185FE8E20050FC700A32277 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4185FE8D20050FC700A32277 /* Assets.xcassets */; };
 		4185FE9120050FC700A32277 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4185FE8F20050FC700A32277 /* LaunchScreen.storyboard */; };
@@ -18,9 +20,11 @@
 /* Begin PBXFileReference section */
 		0643C2C212FD02859AA58356 /* Pods_EjemploBeacon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EjemploBeacon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		23E4A2BC67DB8A4E3E8F8A33 /* Pods-EjemploBeacon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EjemploBeacon.release.xcconfig"; path = "Pods/Target Support Files/Pods-EjemploBeacon/Pods-EjemploBeacon.release.xcconfig"; sourceTree = "<group>"; };
+		414B5B532005127000F2E961 /* PrincipalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrincipalViewController.swift; sourceTree = "<group>"; };
+		414B5B552005129A00F2E961 /* EmisorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmisorViewController.swift; sourceTree = "<group>"; };
+		414B5B57200512B500F2E961 /* ReceptorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceptorViewController.swift; sourceTree = "<group>"; };
 		4185FE8320050FC700A32277 /* EjemploBeacon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EjemploBeacon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4185FE8620050FC700A32277 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4185FE8820050FC700A32277 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4185FE8B20050FC700A32277 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4185FE8D20050FC700A32277 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4185FE9020050FC700A32277 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -62,11 +66,13 @@
 			isa = PBXGroup;
 			children = (
 				4185FE8620050FC700A32277 /* AppDelegate.swift */,
-				4185FE8820050FC700A32277 /* ViewController.swift */,
 				4185FE8A20050FC700A32277 /* Main.storyboard */,
 				4185FE8D20050FC700A32277 /* Assets.xcassets */,
 				4185FE8F20050FC700A32277 /* LaunchScreen.storyboard */,
 				4185FE9220050FC700A32277 /* Info.plist */,
+				414B5B532005127000F2E961 /* PrincipalViewController.swift */,
+				414B5B552005129A00F2E961 /* EmisorViewController.swift */,
+				414B5B57200512B500F2E961 /* ReceptorViewController.swift */,
 			);
 			path = EjemploBeacon;
 			sourceTree = "<group>";
@@ -221,8 +227,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4185FE8920050FC700A32277 /* ViewController.swift in Sources */,
 				4185FE8720050FC700A32277 /* AppDelegate.swift in Sources */,
+				414B5B542005127000F2E961 /* PrincipalViewController.swift in Sources */,
+				414B5B58200512B500F2E961 /* ReceptorViewController.swift in Sources */,
+				414B5B562005129A00F2E961 /* EmisorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,7 +375,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = con.jaureguialzo.EjemploBeacon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -383,7 +391,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = con.jaureguialzo.EjemploBeacon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

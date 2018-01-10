@@ -36,7 +36,7 @@ class PrincipalViewController: UIViewController, CLLocationManagerDelegate {
 
         switch CLLocationManager.authorizationStatus() {
         case .notDetermined:
-            locationManager.requestAlwaysAuthorization()
+            locationManager.requestWhenInUseAuthorization()
             break
 
         case .restricted, .denied:

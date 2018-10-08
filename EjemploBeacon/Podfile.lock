@@ -1,22 +1,28 @@
 PODS:
-  - Eureka (4.0.1)
+  - Eureka (4.3.0)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
-  - XCGLogger (6.0.2):
-    - XCGLogger/Core (= 6.0.2)
-  - XCGLogger/Core (6.0.2):
+  - XCGLogger (6.1.0):
+    - XCGLogger/Core (= 6.1.0)
+  - XCGLogger/Core (6.1.0):
     - ObjcExceptionBridging
 
 DEPENDENCIES:
   - Eureka
   - XCGLogger
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Eureka
+    - ObjcExceptionBridging
+    - XCGLogger
+
 SPEC CHECKSUMS:
-  Eureka: c8bd5cc07143b6f66268c208d28a246c99b41955
+  Eureka: 6d711cb30ca333b4bc893110285a722ae3840114
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
-  XCGLogger: c9601cae9a8912de34a58666ba931ed3d624dd31
+  XCGLogger: 7f7f43f15dfe3a305fa1342b7dc29af656289abd
 
 PODFILE CHECKSUM: 80f388adfff6e92b059e1c368addcaa4a0678de6
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3
